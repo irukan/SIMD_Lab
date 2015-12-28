@@ -1,0 +1,256 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA65C3F91C303880008A7EC8 /* SIMD_Lab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */; };
+		AA65C4061C30D08B008A7EC8 /* MyTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA65C3F31C303880008A7EC8 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AA65C3F51C303880008A7EC8 /* SIMD_Lab */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SIMD_Lab; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SIMD_Lab.cpp; sourceTree = "<group>"; };
+		AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MyTimer.cpp; path = SIMD_Lab/MyTimer/MyTimer.cpp; sourceTree = "<group>"; };
+		AA65C4051C30D08B008A7EC8 /* MyTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyTimer.h; path = SIMD_Lab/MyTimer/MyTimer.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA65C3F21C303880008A7EC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA65C3EC1C303880008A7EC8 = {
+			isa = PBXGroup;
+			children = (
+				AA65C4031C30D076008A7EC8 /* MyTimer */,
+				AA65C3F71C303880008A7EC8 /* SIMD_Lab */,
+				AA65C3F61C303880008A7EC8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA65C3F61C303880008A7EC8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA65C3F51C303880008A7EC8 /* SIMD_Lab */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA65C3F71C303880008A7EC8 /* SIMD_Lab */ = {
+			isa = PBXGroup;
+			children = (
+				AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */,
+			);
+			path = SIMD_Lab;
+			sourceTree = "<group>";
+		};
+		AA65C4031C30D076008A7EC8 /* MyTimer */ = {
+			isa = PBXGroup;
+			children = (
+				AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */,
+				AA65C4051C30D08B008A7EC8 /* MyTimer.h */,
+			);
+			name = MyTimer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA65C3F41C303880008A7EC8 /* SIMD_Lab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA65C3FC1C303880008A7EC8 /* Build configuration list for PBXNativeTarget "SIMD_Lab" */;
+			buildPhases = (
+				AA65C3F11C303880008A7EC8 /* Sources */,
+				AA65C3F21C303880008A7EC8 /* Frameworks */,
+				AA65C3F31C303880008A7EC8 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SIMD_Lab;
+			productName = SIMD_Lab;
+			productReference = AA65C3F51C303880008A7EC8 /* SIMD_Lab */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA65C3ED1C303880008A7EC8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = kayama;
+				TargetAttributes = {
+					AA65C3F41C303880008A7EC8 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
+			};
+			buildConfigurationList = AA65C3F01C303880008A7EC8 /* Build configuration list for PBXProject "SIMD_Lab" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AA65C3EC1C303880008A7EC8;
+			productRefGroup = AA65C3F61C303880008A7EC8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA65C3F41C303880008A7EC8 /* SIMD_Lab */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA65C3F11C303880008A7EC8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA65C3F91C303880008A7EC8 /* SIMD_Lab.cpp in Sources */,
+				AA65C4061C30D08B008A7EC8 /* MyTimer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA65C3FA1C303880008A7EC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AA65C3FB1C303880008A7EC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AA65C3FD1C303880008A7EC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AA65C3FE1C303880008A7EC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA65C3F01C303880008A7EC8 /* Build configuration list for PBXProject "SIMD_Lab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA65C3FA1C303880008A7EC8 /* Debug */,
+				AA65C3FB1C303880008A7EC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA65C3FC1C303880008A7EC8 /* Build configuration list for PBXNativeTarget "SIMD_Lab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA65C3FD1C303880008A7EC8 /* Debug */,
+				AA65C3FE1C303880008A7EC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA65C3ED1C303880008A7EC8 /* Project object */;
+}
