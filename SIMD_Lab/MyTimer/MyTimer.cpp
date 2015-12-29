@@ -8,21 +8,40 @@
 
 #include "MyTimer.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
-MyTimer::MyTimer()
+std::string
+getTimeResoStr(TimeReso reso)
 {
+    switch (reso)
+    {
+        case NANO:
+            return "nS";
+        case MICRO:
+            return "uS";
+        case MILLI:
+            return "mS";
+
+        case SEC:
+        default:
+            return "S";
+            break;
+    }
 }
 
-MyTimer::~MyTimer()
-{
-    
-}
+MyTimer::MyTimer(){}
+
+MyTimer::~MyTimer(){}
 
 void
-MyTimer::start()
+MyTimer::start(const std::string& label, TimeReso reso)
 {
+    m_label.push_back(label);
+    m_reso.push_back(reso);
+    
     m_start = std::chrono::high_resolution_clock::now();
 }
 
@@ -30,6 +49,8 @@ void
 MyTimer::stop()
 {
     m_stop = std::chrono::high_resolution_clock::now();
+    
+    m_data.push_back(getTime(m_reso[m_reso.size() - 1]));
 }
 
 double
@@ -49,34 +70,26 @@ MyTimer::getTime(TimeReso reso)
     }
 }
 
-// ######################################################################################################
-
-AutoTimer::AutoTimer(std::string label, TimeReso reso)
+void
+MyTimer::output(const std::string& file)
 {
-    m_label = label;
-    m_reso = reso;
+    size_t size = m_data.size();
     
-    m_timer.start();
-}
-
-AutoTimer::~AutoTimer()
-{
-    m_timer.stop();
-    
-    switch (m_reso)
+    ostringstream os;
+    for (int i = 0; i < size; i++)
     {
-        case NANO:
-            cout << m_label << "," << m_timer.getTime(NANO) << "," << "nS" << endl;
-            break;
-        case MICRO:
-            cout << m_label << "," << m_timer.getTime(MICRO) << "," << "uS" << endl;
-            break;
-        case MILLI:
-            cout << m_label << "," << m_timer.getTime(MILLI) << "," << "mS" << endl;
-            break;
-        case SEC:
-        default:
-            cout << m_label << "," << m_timer.getTime(SEC) << "," << "S" << endl;
-            break;
+        os << m_label[i] << ","
+           << m_data[i] << ","
+           << getTimeResoStr(m_reso[i])
+           << endl;
+    }
+    
+    cout << os.str();
+    
+    if (file.size() != 0)
+    {
+        ofstream ofs(file);
+        ofs << os.str();
+        ofs.close();
     }
 }

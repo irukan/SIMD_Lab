@@ -6,23 +6,40 @@
 //  Copyright © 2015年 kayama. All rights reserved.
 //
 
-#include <iostream>
 #include <xmmintrin.h>
 #include "MyTimer/MyTimer.h"
+#include <vector>
+MyTimer *timer;
 
+using namespace std;
+void
+func(double* data, double mul, size_t size)
+{
+    for (int i = 0; i< size ;i++)
+        data[i] *= mul;
+}
 
 int main(int argc, const char * argv[]) {
 
+    timer = new MyTimer();
+    
+    int dataN = 5000;
+    vector<double> ar;
+    
+    for (int i = 0; i< dataN ;i++)
+        ar.push_back(i/10.5);
+    
+    for (int lp = 0; lp< 10000; lp++)
     {
-        AutoTimer("test", NANO);
-        // 重い処理
-        long long j = 0;
-        for(int i = 1; i <= 100; ++i)
-        {
-            j += i;
-        }
+
+        timer->start("to_string", NANO);
+    
+        for (int i = 0; i< dataN ;i++)
+            ar[i] = ar[i] * 2 * 5;
+        
+        timer->stop();
     }
     
-    
+    timer->output("output.csv");
     return 0;
 }
