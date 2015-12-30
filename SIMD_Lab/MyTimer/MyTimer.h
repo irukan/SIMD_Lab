@@ -30,10 +30,13 @@ private:
     std::vector<std::string> m_label;
     std::vector<double> m_data;
     std::vector<TimeReso> m_reso;
-    
-public:
+ 
     MyTimer();
     ~MyTimer();
+public:
+
+    
+    static MyTimer& getInstance();
     
     void start(const std::string& label, TimeReso reso);
     void stop();
@@ -43,5 +46,7 @@ public:
     void output(const std::string& file = "");
     
 };
+
+#define TIMER MyTimer::getInstance()
 
 #endif /* MyTimer_hpp */

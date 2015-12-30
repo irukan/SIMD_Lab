@@ -32,9 +32,19 @@ getTimeResoStr(TimeReso reso)
     }
 }
 
-MyTimer::MyTimer(){}
+MyTimer::MyTimer()
+{
+}
 
 MyTimer::~MyTimer(){}
+
+MyTimer&
+MyTimer::getInstance()
+{
+    static MyTimer inst;
+    
+    return inst;
+}
 
 void
 MyTimer::start(const std::string& label, TimeReso reso)
@@ -92,4 +102,8 @@ MyTimer::output(const std::string& file)
         ofs << os.str();
         ofs.close();
     }
+    
+    m_data.clear();
+    m_label.clear();
+    m_reso.clear();
 }

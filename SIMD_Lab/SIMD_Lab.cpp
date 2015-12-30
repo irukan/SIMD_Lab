@@ -9,7 +9,6 @@
 #include <xmmintrin.h>
 #include "MyTimer/MyTimer.h"
 #include <vector>
-MyTimer *timer;
 
 using namespace std;
 void
@@ -21,25 +20,34 @@ func(double* data, double mul, size_t size)
 
 int main(int argc, const char * argv[]) {
 
-    timer = new MyTimer();
-    
     int dataN = 5000;
     vector<double> ar;
     
     for (int i = 0; i< dataN ;i++)
         ar.push_back(i/10.5);
     
-    for (int lp = 0; lp< 10000; lp++)
+    for (int lp = 0; lp< 50000; lp++)
     {
 
-        timer->start("to_string", NANO);
+        TIMER.start("mul", NANO);
     
         for (int i = 0; i< dataN ;i++)
-            ar[i] = ar[i] * 2 * 5;
+            ar[i] = ar[i] * 2;
         
-        timer->stop();
+        TIMER.stop();
+        
+        TIMER.start("diff", NANO);
+    
+        for (int i = 0; i< dataN ;i++)
+            ar[i] = ar[i] / 2;
+        
+        TIMER.stop();
     }
     
-    timer->output("output.csv");
+    
+    TIMER.output("output.csv");
+    
+    system("python Analysis/DispHist.py output.csv 1200 1400");
+    
     return 0;
 }

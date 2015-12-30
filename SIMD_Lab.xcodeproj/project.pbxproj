@@ -24,6 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AA34907F1C33854B009BC2B2 /* DispHist.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = DispHist.py; path = Analysis/DispHist.py; sourceTree = "<group>"; };
 		AA65C3F51C303880008A7EC8 /* SIMD_Lab */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SIMD_Lab; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SIMD_Lab.cpp; sourceTree = "<group>"; };
 		AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MyTimer.cpp; path = SIMD_Lab/MyTimer/MyTimer.cpp; sourceTree = "<group>"; };
@@ -41,9 +42,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA34907E1C33853C009BC2B2 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				AA34907F1C33854B009BC2B2 /* DispHist.py */,
+			);
+			name = Analysis;
+			sourceTree = "<group>";
+		};
 		AA65C3EC1C303880008A7EC8 = {
 			isa = PBXGroup;
 			children = (
+				AA34907E1C33853C009BC2B2 /* Analysis */,
 				AA65C4031C30D076008A7EC8 /* MyTimer */,
 				AA65C3F71C303880008A7EC8 /* SIMD_Lab */,
 				AA65C3F61C303880008A7EC8 /* Products */,
@@ -249,6 +259,7 @@
 				AA65C3FE1C303880008A7EC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
