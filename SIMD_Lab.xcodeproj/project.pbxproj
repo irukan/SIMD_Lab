@@ -26,6 +26,8 @@
 /* Begin PBXFileReference section */
 		AA34907F1C33854B009BC2B2 /* DispHist.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = DispHist.py; path = Analysis/DispHist.py; sourceTree = "<group>"; };
 		AA3490801C338968009BC2B2 /* DispPlot.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; name = DispPlot.py; path = Analysis/DispPlot.py; sourceTree = "<group>"; };
+		AA3490811C338F46009BC2B2 /* Normal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Normal.h; sourceTree = "<group>"; };
+		AA3490821C338F53009BC2B2 /* SSE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSE.h; sourceTree = "<group>"; };
 		AA65C3F51C303880008A7EC8 /* SIMD_Lab */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SIMD_Lab; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SIMD_Lab.cpp; sourceTree = "<group>"; };
 		AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MyTimer.cpp; path = SIMD_Lab/MyTimer/MyTimer.cpp; sourceTree = "<group>"; };
@@ -74,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */,
+				AA3490821C338F53009BC2B2 /* SSE.h */,
+				AA3490811C338F46009BC2B2 /* Normal.h */,
 			);
 			path = SIMD_Lab;
 			sourceTree = "<group>";
@@ -238,6 +242,7 @@
 		AA65C3FE1C303880008A7EC8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

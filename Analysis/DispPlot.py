@@ -29,7 +29,7 @@ for l in lblData:
     getTime = time[(label == l)].values
     
     info = "" + l
-    ax_plot.plot(getTime, label = info)
+    ax_plot.plot(getTime, '.', label = info)
 
 plt.legend()
 plt.show()

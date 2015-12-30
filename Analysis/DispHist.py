@@ -30,10 +30,11 @@ ax_hist.set_xlabel(reso.values[0])
 for l in lblData:
     # Histgram
     getTime = time[(label == l) & (time > min) & (time < max)].values
+    #getTime = time[(label == l)].values
     (mu, sigma) = norm.fit(getTime)
 
-    info = r'$\mathrm{%s:}\ \mu=%.2f\ \sigma=%.2f$' %(l, mu, sigma)
-    ax_hist.hist(getTime, bins = 150, histtype='step',linewidth=1.5, label = info)
+    info = l + " " + r'$\mathrm{}\ \mu=%.2f\ \sigma=%.2f$' %(mu, sigma)
+    ax_hist.hist(getTime, bins = 100, histtype='step',linewidth=1.5, label = info)
 
 plt.legend()
 plt.show()
