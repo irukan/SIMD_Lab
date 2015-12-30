@@ -9,7 +9,7 @@
 #ifndef SSE_h
 #define SSE_h
 #include <xmmintrin.h>
-
+#include <tmmintrin.h>
 void copy_SSE(double* data, double* dist, size_t n)
 {
     if (n % 2 == 0)
@@ -48,7 +48,10 @@ void copy_SSE(double* data, double* dist, size_t n)
 
 void add_SSE(double* data, double add, size_t n)
 {
-    __m128d add_m = {add, add};
+    
+    __m128i add_m;
+    //add_m.m128i_i16[0] = 1;
+    
     for (size_t i = 0; i < n; i += 2)
     {
         __m128d data_m = _mm_load_pd(&data[i]);
@@ -65,6 +68,17 @@ void add_SSE2(double* data, double add, size_t n)
     for (size_t i = 0; i < n; i += 2)
     {
         data_m[i] = _mm_add_pd(data_m[i], add_m);
+    }
+}
+
+void add_SSE(int* data, int add, size_t n)
+{
+    __v4si add_m = {add, add, add, add};
+
+    for (size_t i = 0; i < n; i += 4)
+    {
+        __m128i data_m = _mm_load_si128( reinterpret_cast<__m128i*>(&data[i]));
+        _mm_stream_si128( reinterpret_cast<__m128i*>(&data[i]), _mm_add_epi32( data_m, add_m ) );
     }
 }
 

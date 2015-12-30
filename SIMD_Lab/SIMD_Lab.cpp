@@ -18,35 +18,46 @@ using namespace std;
 
 int  main(int argc, const char * argv[]) {
 
-    int dataN = 7001;
+    int dataN = 7000;
     double *ar1 = new double[dataN];
     double *ar2 = new double[dataN];
     
     double *target1 = new double[dataN];
     double *target2 = new double[dataN];
     
+
+    int *arI1 = new int[dataN];
+    int *arI2 = new int[dataN];
+
+
     
-    for (int i = 0; i< dataN ;i++)
-    {
-        ar1[i] = (double)i / 10.5;
-        ar2[i] = (double)i / 10.5;
-    }
     
-    for (int lp = 0; lp< 100000; lp++)
+    
+    for (int lp = 0; lp< 10000; lp++)
     {
+        
+        for (int i = 0; i< dataN ;i++)
+        {
+            ar1[i] = (double)i / 10.5;
+            ar2[i] = (double)i / 10.5;
+            
+            arI1[i] = i;
+            arI2[i] = i;
+        }
         
         TIMER.start("add_Normal", NANO);
-        add_Normal(ar1, 0.1, dataN);
+        add_Normal(arI1, 1, dataN);
         TIMER.stop();
         
         
-        TIMER.start("add_SSE", NANO);
-        add_SSE(ar2, 0.1, dataN);
-        TIMER.stop();
+//        TIMER.start("add_SSE", NANO);
+//        add_SSE(ar2, 0.1, dataN);
+//        TIMER.stop();
         
         TIMER.start("add_SSE2", NANO);
-        add_SSE2(ar1, 0.1, dataN);
+        add_SSE(arI2, 1, dataN);
         TIMER.stop();
+
         //        TIMER.start("copy_Normal", NANO);
         //        copy_Normal(ar1, target1, dataN);
         //        TIMER.stop();
