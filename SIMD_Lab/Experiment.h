@@ -149,23 +149,22 @@ void exp_add_int()
 }
 void exp_copy_int()
 {
-    dataN = 10000;
+    dataN = 10006;
     loopN = 5000;
     
     for (int i = 0; i < loopN; i++)
     {
-        int *arI1 = rampArr<int>(10);
-        int *arI2 = rampArr<int>(10);
+        int *data = rampArr<int>(10);
         
         int *target1 = fixArr(0);
         int *target2 = fixArr(0);
         
         TIMER.start("copy_Normal", NANO);
-        copy_Normal(arI1, target1, dataN);
+        copy_Normal(data, target1, dataN);
         TIMER.stop();
         
         TIMER.start("copy_SSE", NANO);
-        copy_SSE(arI2, target2, dataN);
+        copy_SSE(data, target2, dataN);
         TIMER.stop();
         
         for (int i = 0; i < dataN; i++)
@@ -180,7 +179,7 @@ void exp_copy_int()
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 5000 25000");
+    system("python Analysis/DispHist.py output.csv 8000 30000");
 }
 
 void exp_max_double()

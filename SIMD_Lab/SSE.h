@@ -13,52 +13,32 @@
 
 void copy_SSE(double* data, double* dist, size_t n)
 {
-    if (n % 2 == 0)
+    size_t const end = (n / 2) * 2;
+    
+    size_t index = 0;
+    for(; index < end; index += 2)
     {
-        for (size_t i = 0; i < n; i += 2)
-        {
-            __m128d data_m = _mm_loadu_pd(&data[i]);
-            _mm_stream_pd(&dist[i], data_m);
-        }
+        __m128d data_m = _mm_loadu_pd(&data[index]);
+        _mm_stream_pd(&dist[index], data_m);
     }
-    else
-    {
-        size_t newSize = n - 2;
-        for (size_t i = 0; i < newSize; i += 2)
-        {
-            // SSE
-            __m128d data_m = _mm_loadu_pd(&data[i]);
-            _mm_stream_pd(&dist[i], data_m);
-        }
-        // Normal
-        dist[n - 1] = data[n -1];
-    }
+    // 余りは、Normal演算
+    for(; index < n; ++index)
+        dist[index] = data[index];
 }
 
 void copy_SSE(int* data, int* dist, size_t n)
 {
-    if (n % 4 == 0)
+    size_t const end = (n / 4) * 4;
+    
+    size_t index = 0;
+    for(; index < end; index += 4)
     {
-        for (size_t i = 0; i < n; i += 4)
-        {
-            __m128i data_m = _mm_loadu_si128(reinterpret_cast<__m128i*>(&data[i]));
-            _mm_stream_si128(reinterpret_cast<__m128i*>(&dist[i]), data_m);
-        }
+        __m128i data_m = _mm_loadu_si128(reinterpret_cast<__m128i*>(&data[index]));
+        _mm_stream_si128(reinterpret_cast<__m128i*>(&dist[index]), data_m);
     }
-    else
-    {
-        size_t newSize = n - 4;
-        for (size_t i = 0; i < newSize; i += 4)
-        {
-            //SSE
-            __m128i data_m = _mm_loadu_si128(reinterpret_cast<__m128i*>(&data[i]));
-            _mm_stream_si128(reinterpret_cast<__m128i*>(&dist[i]), data_m);
-        }
-        // Normal
-        dist[n - 3] = data[n - 3];
-        dist[n - 2] = data[n - 2];
-        dist[n - 1] = data[n - 1];
-    }
+    // 余りは、Normal演算
+    for(; index < n; ++index)
+        dist[index] = data[index];
 }
 
 void add_SSE(double* data, double add, size_t n)
