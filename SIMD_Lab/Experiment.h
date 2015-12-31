@@ -203,6 +203,7 @@ void exp_max_double()
         max2 = max_SSE(data, dataN);
         TIMER.stop();
         
+        
         if (!isEqual<double>(max1, max2))
         {
             cout << "Not match" << endl;
@@ -212,7 +213,7 @@ void exp_max_double()
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 20000 50000");
+    system("python Analysis/DispHist.py output.csv 22000 50000");
 }
 
 void exp_findIdx_int()

@@ -16,9 +16,9 @@ int  main(int argc, const char * argv[])
     //exp_copy_int();
     //exp_add_double();
     //exp_add_int();
-    //exp_max_double();
+    exp_max_double();
     
-    exp_findIdx_int();
+    //exp_findIdx_int();
     
     return 0;
 }
