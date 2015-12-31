@@ -45,7 +45,7 @@ void div_Normal(T* data, T div, size_t n)
 }
 
 template<typename T>
-double max_Normal(T* data, size_t n)
+inline double max_Normal(T* data, size_t n)
 {
     T max = data[0];
     

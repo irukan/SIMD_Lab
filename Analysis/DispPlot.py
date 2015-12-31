@@ -25,7 +25,7 @@ ax_plot = fig.add_subplot(1,1,1)
 ax_plot.set_ylabel(reso.values[0])
 
 for l in lblData:
-    # Histgram
+    # Plot
     getTime = time[(label == l)].values
     
     info = "" + l

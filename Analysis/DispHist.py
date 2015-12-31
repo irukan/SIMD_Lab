@@ -32,6 +32,7 @@ for l in lblData:
     getTime = time[(label == l) & (time > min) & (time < max)].values
     #getTime = time[(label == l)].values
     (mu, sigma) = norm.fit(getTime)
+    mid = np.median(getTime)
 
     info = l + " " + r'$\mathrm{}\ \mu=%.2f\ \sigma=%.2f$' %(mu, sigma)
     ax_hist.hist(getTime, bins = 100, histtype='step',linewidth=1.5, label = info)
