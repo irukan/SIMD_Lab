@@ -138,9 +138,9 @@ int
 findIdx_SSE(int* data, int search, size_t n)
 {
     __m128i search_m = _mm_set1_epi32(search);
-
+    
     int result[4];
-    //int *result = new __attribute__((aligned(32))) int[4];
+    //__attribute__((aligned(16)))int result[4];
     
     int index = 0;
     for (; index < n; index += 4)
@@ -150,9 +150,11 @@ findIdx_SSE(int* data, int search, size_t n)
         // ##### if (data_m == search_m) -> true: 0xFFFFFFFF(-1), false: 0x00000000(0) #####
         __m128i mask = _mm_cmpeq_epi32(data_m, search_m);
         
-        _mm_stream_si128( reinterpret_cast<__m128i*>(&result[0]), mask);
-        if ((result[0] + result[1] + result[2] + result[3]) < 0)
+        if ((mask[0] + mask[1]) != 0)
+        {
+            _mm_stream_si128( reinterpret_cast<__m128i*>(&result[0]), mask);
             break;
+        }
     }
     
     for (int i = 0; i < 4; i++)
@@ -164,6 +166,4 @@ findIdx_SSE(int* data, int search, size_t n)
     
     return -1;
 }
-
-
 #endif /* SSE_h */

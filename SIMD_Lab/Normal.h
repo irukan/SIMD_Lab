@@ -68,4 +68,39 @@ int findIdx_Normal(T* data, T search, size_t n)
     return -1;
 }
 
+int factorial(int n) {
+    if (n > 0) {
+        return n * factorial(n - 1);
+    } else {
+        return 1;
+    }
+}
+
+double power(double data, int n)
+{
+    double ret = 1;
+    for (int i = 0; i< n; i++)
+        ret *= data;
+    return ret;
+}
+
+double
+sin_Normal(double sita, int rank)
+{
+    double ret = 0.0;
+
+//    int ruijo = 1;
+//    
+//    for (int i = 0; i< rank; i++)
+//    {
+//        ret += power(sita, ruijo) * 1.0/ (double)factorial(ruijo) * ( i %2 == 0 ? 1: -1);
+//        ruijo += 2;
+//    }
+    
+    ret += sita;
+    ret -= 0.16666666666 * sita * sita * sita;
+    ret += 0.00833333333 * sita * sita * sita * sita * sita;
+    ret -= 0.00018518518 * sita * sita * sita * sita * sita * sita * sita;
+    return ret;
+}
 #endif /* Normal_h */

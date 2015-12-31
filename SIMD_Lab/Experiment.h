@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <math.h>
+#include <algorithm>
 #include <random>
 
 using namespace std;
@@ -229,9 +230,12 @@ void exp_findIdx_int()
         volatile int idx1;
         volatile int idx2;
         
+        
         TIMER.start("findIdx_Normal", NANO);
         idx1 = findIdx_Normal(data, target , dataN);
         TIMER.stop();
+
+
         
         TIMER.start("findIdx_SSE", NANO);
         idx2 = findIdx_SSE(data, target , dataN);
@@ -245,8 +249,49 @@ void exp_findIdx_int()
     }
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 27000");
+    system("python Analysis/DispHist.py output.csv 0 17000");
     
 }
 
+void exp_sine()
+{
+    dataN = 1000;
+    loopN = 1000;
+    
+    for (int l = 0; l< loopN; l++)
+    {
+        volatile double x = 0;
+        TIMER.start("sin_My", NANO);
+        for (int i = 0; i < dataN; i++)
+        {
+            x = sin_Normal(0.5, 5);
+        }
+        TIMER.stop();
+
+        TIMER.start("sin_STD", NANO);
+        for (int i = 0; i < dataN; i++)
+        {
+            x = sin(0.5);
+            x = sin(0.7);
+        }
+        TIMER.stop();
+    }
+
+//    double x = sin(0.5);
+//    cout << "Match" << endl;
+//    
+//    if (isEqual(sin(0.5), sin_Normal(0.5, 20)))
+//    {
+//        cout << "Match" << endl;
+//    }
+//    else
+//    {
+//        cout << "Not Match" << endl;
+//    }
+    
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 0 27000");
+    
+}
 #endif /* Experiment_h */
