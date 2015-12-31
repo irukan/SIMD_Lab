@@ -45,7 +45,7 @@ void div_Normal(T* data, T div, size_t n)
 }
 
 template<typename T>
-inline double max_Normal(T* data, size_t n)
+double max_Normal(T* data, size_t n)
 {
     T max = data[0];
     
@@ -55,6 +55,17 @@ inline double max_Normal(T* data, size_t n)
     return max;
 }
 
-
+template<typename T>
+int findIdx_Normal(T* data, T search, size_t n)
+{
+    int index;
+    for (index = 0; index < n; index++)
+    {
+        if (data[index] == search)
+            return index;
+    }
+    
+    return -1;
+}
 
 #endif /* Normal_h */

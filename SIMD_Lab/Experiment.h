@@ -47,12 +47,12 @@ T* rampArr(double slope)
     return ar;
 }
 
-double* sinArr()
+double* sinArr(double amp = 1.0)
 {
     double dx = 2 * M_PI / (double)dataN;
     double *ar = new double[dataN];
     for (int i = 0; i < dataN; i++)
-        ar[i] = sin(dx * i);
+        ar[i] = sin(dx * i) * amp;
     
     return ar;
 }
@@ -69,6 +69,16 @@ T* randArr(T min, T max)
         ar[i] = randVal(mt);
     
     return ar;
+}
+
+int
+randVal(int min, int max)
+{
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> rand(min, max);
+    
+    return rand(mt);
 }
 
 //######################################################################################
@@ -89,6 +99,15 @@ void exp_add_double()
         TIMER.start("add_SSE", NANO);
         add_SSE(ar2, 0.1, dataN);
         TIMER.stop();
+        
+        for (int i = 0; i< dataN; i++)
+        {
+            if (isEqual(ar1[i], ar2[i]))
+            {
+                cout << "Not match" << endl;
+                exit(1);
+            }
+        }
     }
     
     TIMER.output("output.csv");
@@ -96,6 +115,38 @@ void exp_add_double()
     system("python Analysis/DispHist.py output.csv 5000 25000");
 }
 
+void exp_add_int()
+{
+    dataN = 10000;
+    loopN = 5000;
+    
+    for (int i = 0; i < loopN; i++)
+    {
+        int *ar1 = rampArr<int>(2);
+        int *ar2 = rampArr<int>(2);
+        
+        TIMER.start("add_Normal", NANO);
+        add_Normal(ar1, 1, dataN);
+        TIMER.stop();
+        
+        TIMER.start("add_SSE", NANO);
+        add_SSE(ar2, 1, dataN);
+        TIMER.stop();
+        
+        for (int i = 0; i< dataN; i++)
+        {
+            if (ar1[i] != ar2[i])
+            {
+                cout << "Not match" << endl;
+                exit(1);
+            }
+        }
+    }
+    
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 5000 25000");
+}
 void exp_copy_int()
 {
     dataN = 10000;
@@ -162,6 +213,40 @@ void exp_max_double()
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
     system("python Analysis/DispHist.py output.csv 20000 50000");
+}
+
+void exp_findIdx_int()
+{
+    dataN = 10000;
+    loopN = 10000;
+    
+    for (int i = 0; i < loopN; i++)
+    {
+        int* data = rampArr<int>(1);
+        //int target = randVal(0, dataN);
+        int target = dataN / 2;
+     
+        volatile int idx1;
+        volatile int idx2;
+        
+        TIMER.start("findIdx_Normal", NANO);
+        idx1 = findIdx_Normal(data, target , dataN);
+        TIMER.stop();
+        
+        TIMER.start("findIdx_SSE", NANO);
+        idx2 = findIdx_SSE(data, target , dataN);
+        TIMER.stop();
+        
+        if (idx1 != idx2)
+        {
+            cout << "Not match" << endl;
+            exit(1);
+        }
+    }
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 0 27000");
+    
 }
 
 #endif /* Experiment_h */
