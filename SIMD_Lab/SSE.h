@@ -10,8 +10,10 @@
 #define SSE_h
 #include <xmmintrin.h>
 #include <tmmintrin.h>
+#include <string>
 
-void copy_SSE(double* data, double* dist, size_t n)
+void
+copy_SSE(double* data, double* dist, size_t n)
 {
     size_t const end = (n / 2) * 2;
     
@@ -26,7 +28,8 @@ void copy_SSE(double* data, double* dist, size_t n)
         dist[index] = data[index];
 }
 
-void copy_SSE(int* data, int* dist, size_t n)
+void
+copy_SSE(int* data, int* dist, size_t n)
 {
     size_t const end = (n / 4) * 4;
     
@@ -39,6 +42,48 @@ void copy_SSE(int* data, int* dist, size_t n)
     // 余りは、Normal演算
     for(; index < n; ++index)
         dist[index] = data[index];
+}
+
+void
+strcpy_SSE(const char* data, char* dist, size_t n)
+{
+    size_t const end = (n / 16) * 16;
+    
+    size_t index = 0;
+    for(; index < end; index += 16)
+    {
+        __m128i data_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data[index]));
+        _mm_stream_si128(reinterpret_cast<__m128i*>(&dist[index]), data_m);
+    }
+    //余りは、Normal演算
+    for(; index < n; ++index)
+        dist[index] = data[index];
+}
+
+bool
+strcmp_SSE(const char* data1, const char* data2, size_t n)
+{
+    size_t const end = (n / 16) * 16;
+    size_t index = 0;
+
+    for(; index < end; index += 16)
+    {
+        __m128i data1_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[index]));
+        __m128i data2_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[index]));
+        
+        __m128i mask = _mm_cmpeq_epi32(data1_m, data2_m);
+        
+        if ((mask[0] + mask[1]) != -2)
+            return false;
+    }
+    //余りは、Normal演算
+    for(; index < n; ++index)
+    {
+        if (data1[index] != data2[index])
+            return false;
+    }
+    
+    return 0;
 }
 
 void add_SSE(double* data, double add, size_t n)

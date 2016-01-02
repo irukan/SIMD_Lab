@@ -18,6 +18,7 @@
 #include <math.h>
 #include <algorithm>
 #include <random>
+#include <string>
 
 using namespace std;
 
@@ -103,7 +104,7 @@ void exp_add_double()
         
         for (int i = 0; i< dataN; i++)
         {
-            if (isEqual(ar1[i], ar2[i]))
+            if (!isEqual(ar1[i], ar2[i]))
             {
                 cout << "Not match" << endl;
                 exit(1);
@@ -293,5 +294,83 @@ void exp_sine()
     //system("python Analysis/DispPlot.py output.csv");
     system("python Analysis/DispHist.py output.csv 0 27000");
     
+}
+
+void
+exp_strcpy()
+{
+    dataN = 10001;
+    loopN = 10000;
+    
+    string randStrData = "abcdefghijklmnopqrstuvwxyz";
+    
+    char* src = new char[dataN];
+    char* dist1 = new char[dataN];
+    char* dist2 = new char[dataN];
+    for (int i = 0; i < dataN -1 ; i++)
+        src[i] =  randStrData[randVal(0, (int)randStrData.size()-1)];
+    
+    for (int l = 0; l< loopN; l++)
+    {
+        memset(dist1, '\0', dataN);
+        memset(dist2, '\0', dataN);
+        
+        TIMER.start("strcpy_Normal", NANO);
+        strcpy(dist1, src);
+        TIMER.stop();
+        
+        TIMER.start("strcpy_SSE", NANO);
+        strcpy_SSE(src, dist2, dataN);
+        TIMER.stop();
+       
+    }
+    
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 0 3000");
+}
+
+void
+exp_strcmp()
+{
+    dataN = 1600;
+    loopN = 10000;
+    
+    string randStrData = "abcdefghijklmnopqrstuvwxyz";
+    
+//    char* src = new char[dataN];
+//    for (int i = 0; i < dataN -1 ; i++)
+//        src[i] =  randStrData[randVal(0, randStrData.size()-1)];
+//    char* target = new char[dataN];
+//    strcpy(target, src);
+//    target[dataN - 2] = 'A';
+    
+    string src;
+    for (int i = 0; i < dataN -1 ; i++)
+        src += randStrData[randVal(0, randStrData.size()-1)];
+    string target = src;
+    target[dataN - 2] = 'A';
+    
+
+    for (int l = 0; l< loopN; l++)
+    {
+        volatile bool find1 = true;
+        volatile int find2 = 1;
+        
+        TIMER.start("strcmp_Normal", NANO);
+        //find1 = strcmp(src, target);
+        find1 = (src == target);
+        TIMER.stop();
+        
+        TIMER.start("strcmp_SSE", NANO);
+        find2 = strcmp_SSE(src.data(), target.data(), dataN);
+        //find2 = strcmp_SSE(src, target, dataN);
+        TIMER.stop();
+    }
+        
+    
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 0 3000");
 }
 #endif /* Experiment_h */

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA65C3F91C303880008A7EC8 /* SIMD_Lab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */; };
-		AA65C4061C30D08B008A7EC8 /* MyTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */; settings = {ASSET_TAGS = (); }; };
+		AA65C4061C30D08B008A7EC8 /* MyTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
