@@ -22,6 +22,7 @@ int  main(int argc, const char * argv[])
     //exp_sine();
     
     //exp_strcpy();
-    exp_strcmp();
+    //exp_strcmp();
+    exp_sin();
     return 0;
 }

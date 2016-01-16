@@ -103,4 +103,74 @@ sin_Normal(double sita, int rank)
     ret -= 0.00018518518 * sita * sita * sita * sita * sita * sita * sita;
     return ret;
 }
+
+int
+strcmp_Normal(const char *s1, const char *s2)
+{
+    for ( ; *s1 == *s2; s1++, s2++)
+    if (*s1 == '\0')
+    return 0;
+    return ((*(unsigned char *)s1 < *(unsigned char *)s2) ? -1 : +1);
+}
+
+static inline constexpr bool lt(char __c1, char __c2) _NOEXCEPT
+{return __c1 < __c2;}
+
+static inline int
+Mymemcmp(const char * s1,const char * s2, size_t n)
+{
+    unsigned char u1, u2;
+    
+    for ( ; n-- ; s1++, s2++) {
+        u1 = * (unsigned char *) s1;
+        u2 = * (unsigned char *) s2;
+        if ( u1 != u2) {
+            return (u1-u2);
+        }
+    }
+    return 0;
+}
+
+#include "SSE.h"
+int
+compare(const char* __s1, const char* __s2, size_t __n)
+{
+//    for (; __n; --__n, ++__s1, ++__s2)
+//    {
+//        if (lt(*__s1, *__s2))
+//        return -1;
+//        if (lt(*__s2, *__s1))
+//        return 1;
+//    }
+//    return 0;
+    
+    return __n == 0 ? 0 : memcmp(__s1, __s2, __n);
+    //return __n == 0 ? 0 : strcmp(__s1, __s2);
+}
+
+inline bool
+strcmp_Normal2(const std::string& s1, const std::string& s2)
+{
+    size_t n = s1.size();
+
+    return n == s2.size() && compare(s1.data(),s2.data(), n) == 0;
+}
+
+inline bool
+strcmp_Normal3(const std::string& __lhs, const std::string& __rhs)
+{
+    size_t __lhs_sz = __lhs.size();
+    if (__lhs_sz != __rhs.size())
+    return false;
+    const char* __lp = __lhs.data();
+    const char* __rp = __rhs.data();
+    if (__lhs.__is_long())
+    //return compare(__lp, __rp, __lhs_sz) == 0;
+    return compare(__lp, __rp, __lhs_sz) == 0;
+    for (; __lhs_sz != 0; --__lhs_sz, ++__lp, ++__rp)
+    if (*__lp != *__rp)
+    return false;
+    return true;
+}
+
 #endif /* Normal_h */

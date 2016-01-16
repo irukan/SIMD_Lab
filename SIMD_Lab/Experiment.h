@@ -344,33 +344,68 @@ exp_strcmp()
 //    char* target = new char[dataN];
 //    strcpy(target, src);
 //    target[dataN - 2] = 'A';
-    
-    string src;
+//    
+    string src="";
     for (int i = 0; i < dataN -1 ; i++)
         src += randStrData[randVal(0, randStrData.size()-1)];
     string target = src;
     target[dataN - 2] = 'A';
     
-
+    
     for (int l = 0; l< loopN; l++)
     {
         volatile bool find1 = true;
-        volatile int find2 = 1;
+        volatile bool find2 = true;
         
-        TIMER.start("strcmp_Normal", NANO);
-        //find1 = strcmp(src, target);
-        find1 = (src == target);
+        TIMER.start("strcmp", NANO);
+        find1 = strcmp(src.data(), target.data());
+        //find1 = (src == target);
         TIMER.stop();
+        cout << boolalpha << find1 << endl;
         
-        TIMER.start("strcmp_SSE", NANO);
-        find2 = strcmp_SSE(src.data(), target.data(), dataN);
-        //find2 = strcmp_SSE(src, target, dataN);
+        TIMER.start("strcmp_Normal3", NANO);
+        find2 = strcmp_Normal3(src, target);
         TIMER.stop();
+        cout << boolalpha << find2 << endl;
+//        TIMER.start("strcmp_SSE", NANO);
+//        //find2 = strcmp_SSE(src.data(), target.data(), dataN);
+//        //find2 = strcmp_SSE(src, target, dataN);
+//        TIMER.stop();
+        
+//        cout << find1 << find2 << endl;
     }
         
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
     system("python Analysis/DispHist.py output.csv 0 3000");
+}
+
+void
+exp_sin()
+{
+    dataN = 1000;
+    loopN = 10000;
+    
+    int dataNForSSE = dataN/2;
+    
+    __m128d theta = _mm_set1_pd(0.5);
+    for (int l = 0; l< loopN; l++)
+    {
+        TIMER.start("sin_Normal", NANO);
+        for (int i = 0; i<dataN;i++)
+            double a = sin(0.5);
+        TIMER.stop();
+        
+        TIMER.start("sin_SSE", NANO);
+        for (int i = 0; i<dataNForSSE;i++)
+            __m128d a_m = sin_SSE(theta);
+        TIMER.stop();
+    }
+    
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 0 7000");
+    
 }
 #endif /* Experiment_h */
