@@ -253,6 +253,7 @@ findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& 
 
     __m128 target_m = _mm_set1_ps(target);
     __m128 index_m = {0,1,2,3};
+    __m128 incVal_m = _mm_set1_ps(4);
     __m128 one = _mm_set1_ps(1);
     
     for(; index < end; index += 4)
@@ -262,21 +263,15 @@ findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& 
         
         if( (mask[0] + mask[1] + mask[2] + mask[3]) != 0)
         {
-            __m128 temp1 = _mm_and_ps(index_m, mask);
-            __m128 temp2 = _mm_and_ps(one, mask);
-            
-            //size_t fN = temp2[0] + temp2[1] + temp2[2] + temp2[3];
+            __m128 hitBit = _mm_and_ps(one, mask);
             
             for (int i = 0; i< 4 ; i++)
             {
-//                if (temp2[i] == 0)
-//                    continue;
-                
-                //findTemp[++findTempNum] = temp1[i];
-                findTemp[findTempNum] = index + temp1[i];
-                findTempNum += temp2[i];
+                findTemp[findTempNum] = index_m[i];
+                findTempNum += hitBit[i];
             }
         }
+        index_m = _mm_add_ps(index_m, incVal_m);
     }
     
     dest = std::vector<int>(findTemp, &findTemp[findTempNum]);

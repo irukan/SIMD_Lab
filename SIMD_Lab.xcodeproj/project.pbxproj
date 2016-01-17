@@ -237,7 +237,7 @@
 		AA65C3FD1C303880008A7EC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_X86_VECTOR_INSTRUCTIONS = default;
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.1;
 				GCC_OPTIMIZATION_LEVEL = s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -246,7 +246,7 @@
 		AA65C3FE1C303880008A7EC8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_X86_VECTOR_INSTRUCTIONS = default;
+				CLANG_X86_VECTOR_INSTRUCTIONS = sse4.1;
 				GCC_OPTIMIZATION_LEVEL = s;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

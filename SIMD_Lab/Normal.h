@@ -180,13 +180,16 @@ template<typename T>
 void findUpIndex_Normal(const std::vector<T>& data, T target, std::vector<int>& dest)
 {
     size_t n = data.size();
+    size_t const end = (n / 4) * 4;
     
+
     int* temp = new int[n];
     int findNum=0;
-    for (int i = 0; i< n; i++)
+    for (size_t i = 0; i< end; i++)
     {
         if (data[i] > target)
         {
+           // dest.push_back(i);
             temp[findNum] = i;
             findNum++;
         }

@@ -428,8 +428,8 @@ exp_findIndex()
 //    findUpIndex_SSE(data, 3, find);
     
     
-    dataN = 1000;
-    loopN = 500;
+    dataN = 500;
+    loopN = 1000;
 
     for (int l = 0; l< loopN; l++)
     {
@@ -438,12 +438,12 @@ exp_findIndex()
             data[i] = randVal((float)0, (float)10);
 
         vector<int> find1, find2;
-        float target = 1.0;
-        
+        float target = 5;
+
         TIMER.start("findUpIndex_Normal", NANO);
         findUpIndex_Normal(data, target, find1);
         TIMER.stop();
-        
+
         TIMER.start("findUpIndex_SSE", NANO);
         findUpIndex_SSE(data, target, find2);
         TIMER.stop();
@@ -461,10 +461,11 @@ exp_findIndex()
                 exit(1);
             }
         }
+        //cout << find1.size() << " " << find2.size()<< endl;
     }
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 10000");
+    system("python Analysis/DispHist.py output.csv 0 5000");
     
 }
 #endif /* Experiment_h */
