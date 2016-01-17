@@ -83,6 +83,16 @@ randVal(int min, int max)
     return rand(mt);
 }
 
+float
+randVal(float min, float max)
+{
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_real_distribution<float> rand(min, max);
+    
+    return rand(mt);
+}
+
 //######################################################################################
 void exp_add_double()
 {
@@ -392,20 +402,69 @@ exp_sin()
     __m128d theta = _mm_set1_pd(0.5);
     for (int l = 0; l< loopN; l++)
     {
+        double a;
+        __m128d a_m;
         TIMER.start("sin_Normal", NANO);
         for (int i = 0; i<dataN;i++)
-            double a = sin(0.5);
+            a = sin(0.5);
         TIMER.stop();
         
         TIMER.start("sin_SSE", NANO);
         for (int i = 0; i<dataNForSSE;i++)
-            __m128d a_m = sin_SSE(theta);
+            a_m = sin_SSE(theta);
         TIMER.stop();
     }
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
     system("python Analysis/DispHist.py output.csv 0 7000");
+}
+
+void
+exp_findIndex()
+{
+//    vector<float> data = {0.2, 1.3, 3.22, 1.3 , 0.44, 4.55, 2.33, 3.33};
+//    vector<int> find;
+//    findUpIndex_SSE(data, 3, find);
+    
+    
+    dataN = 1000;
+    loopN = 500;
+
+    for (int l = 0; l< loopN; l++)
+    {
+        vector<float> data(dataN);
+        for (size_t i = 0 ; i< dataN; i++)
+            data[i] = randVal((float)0, (float)10);
+
+        vector<int> find1, find2;
+        float target = 1.0;
+        
+        TIMER.start("findUpIndex_Normal", NANO);
+        findUpIndex_Normal(data, target, find1);
+        TIMER.stop();
+        
+        TIMER.start("findUpIndex_SSE", NANO);
+        findUpIndex_SSE(data, target, find2);
+        TIMER.stop();
+        
+        if (find1.size() != find2.size())
+        {
+            cout << "Size not match" << endl;
+            exit(1);
+        }
+        for (size_t i = 0; i < find1.size(); i++)
+        {
+            if (find1[i] != find2[i])
+            {
+                cout << "Not Match!" << endl;
+                exit(1);
+            }
+        }
+    }
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 0 10000");
     
 }
 #endif /* Experiment_h */

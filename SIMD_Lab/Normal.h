@@ -9,6 +9,8 @@
 #ifndef Normal_h
 #define Normal_h
 
+#include <vector>
+
 template<typename T>
 void copy_Normal(T* data, T* dist, size_t n)
 {
@@ -171,6 +173,27 @@ strcmp_Normal3(const std::string& __lhs, const std::string& __rhs)
     if (*__lp != *__rp)
     return false;
     return true;
+}
+
+
+template<typename T>
+void findUpIndex_Normal(const std::vector<T>& data, T target, std::vector<int>& dest)
+{
+    size_t n = data.size();
+    
+    int* temp = new int[n];
+    int findNum=0;
+    for (int i = 0; i< n; i++)
+    {
+        if (data[i] > target)
+        {
+            temp[findNum] = i;
+            findNum++;
+        }
+    }
+    
+    dest = std::vector<int>(temp, &temp[findNum]);
+    delete [] temp;
 }
 
 #endif /* Normal_h */

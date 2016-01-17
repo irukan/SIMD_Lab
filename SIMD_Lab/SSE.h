@@ -10,6 +10,7 @@
 #define SSE_h
 #include <xmmintrin.h>
 #include <tmmintrin.h>
+//#include <smmintrin.h>
 #include <string>
 
 void
@@ -240,6 +241,46 @@ sin_SSE(__m128d th_m)
     return sum;
 }
 
+void
+findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& dest)
+{
+    size_t n = data.size();
+    size_t const end = (n / 4) * 4;
+    size_t index = 0;
+    
+    int *findTemp = new __attribute__((aligned(16))) int[end];
+    int findTempNum = 0;
 
+    __m128 target_m = _mm_set1_ps(target);
+    __m128 index_m = {0,1,2,3};
+    __m128 one = _mm_set1_ps(1);
+    
+    for(; index < end; index += 4)
+    {
+        __m128 data_m = _mm_loadu_ps(&data[index]);
+        __m128 mask = _mm_cmpgt_ps(data_m, target_m);
+        
+        if( (mask[0] + mask[1] + mask[2] + mask[3]) != 0)
+        {
+            __m128 temp1 = _mm_and_ps(index_m, mask);
+            __m128 temp2 = _mm_and_ps(one, mask);
+            
+            //size_t fN = temp2[0] + temp2[1] + temp2[2] + temp2[3];
+            
+            for (int i = 0; i< 4 ; i++)
+            {
+//                if (temp2[i] == 0)
+//                    continue;
+                
+                //findTemp[++findTempNum] = temp1[i];
+                findTemp[findTempNum] = index + temp1[i];
+                findTempNum += temp2[i];
+            }
+        }
+    }
+    
+    dest = std::vector<int>(findTemp, &findTemp[findTempNum]);
+    delete [] findTemp;
+}
 
 #endif /* SSE_h */

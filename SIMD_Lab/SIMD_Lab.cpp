@@ -23,6 +23,8 @@ int  main(int argc, const char * argv[])
     
     //exp_strcpy();
     //exp_strcmp();
-    exp_sin();
+    //exp_sin();
+    
+    exp_findIndex();
     return 0;
 }
