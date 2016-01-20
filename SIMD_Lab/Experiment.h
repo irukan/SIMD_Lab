@@ -438,14 +438,14 @@ exp_findIndex()
             data[i] = randVal((float)0, (float)10);
 
         vector<int> find1, find2;
-        float target = 5;
-
+        float target = 9;
+      
         TIMER.start("findUpIndex_Normal", NANO);
-        findUpIndex_Normal(data, target, find1);
+        findUpIndex_Normal(data, target, find2);
         TIMER.stop();
 
         TIMER.start("findUpIndex_SSE", NANO);
-        findUpIndex_SSE(data, target, find2);
+        findUpIndex_SSE(data, target, find1);
         TIMER.stop();
         
         if (find1.size() != find2.size())
@@ -465,7 +465,8 @@ exp_findIndex()
     }
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 5000");
+    system("python Analysis/DispHist.py output.csv 0 15000");
     
 }
+
 #endif /* Experiment_h */

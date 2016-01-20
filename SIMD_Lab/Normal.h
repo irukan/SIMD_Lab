@@ -189,7 +189,7 @@ void findUpIndex_Normal(const std::vector<T>& data, T target, std::vector<int>& 
     {
         if (data[i] > target)
         {
-           // dest.push_back(i);
+            //dest.push_back(i);
             temp[findNum] = i;
             findNum++;
         }

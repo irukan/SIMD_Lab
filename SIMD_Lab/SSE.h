@@ -241,37 +241,100 @@ sin_SSE(__m128d th_m)
     return sum;
 }
 
-void
+//
+
+static __inline__ __m128i __attribute__((__always_inline__, __nodebug__))
+gather_left_ps(__m128i data, __m128 mask, int* count )
+{
+    __m128 target = _mm_and_ps(_mm_set_ps(8, 4, 2, 1), mask);
+ 
+    switch ((int)(target[0] + target[1] + target[2] + target[3])) {
+
+        case 1:
+            *count = 1;
+            //return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,2,1,0));
+            return data;
+        case 2:
+            *count = 1;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,2,0,1));
+        case 3:
+            *count = 2;
+            //return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,2,1,0));
+            return data;
+        case 4:
+            *count = 1;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,1,0,2));
+        case 5:
+            *count = 2;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,1,2,0));
+        case 6:
+            *count = 2;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,0,2,1));
+        case 7:
+            *count = 3;
+            //return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,2,1,0));
+            return data;
+        case 8:
+            *count = 1;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(2,1,0,3));
+        case 9:
+            *count = 2;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(2,1,3,0));
+        case 10:
+            *count = 2;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(2,0,3,1));
+        case 11:
+            *count = 3;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(2,3,1,0));
+        case 12:
+            *count = 2;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(1,0,3,2));
+        case 13:
+            *count = 3;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(1,3,2,0));
+        case 14:
+            *count = 3;
+            return _mm_shuffle_epi32(data, _MM_SHUFFLE(0,3,2,1));
+        case 15:
+            *count = 4;
+            //return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,2,1,0));
+            return data;
+            
+        default:
+        //case 0:
+            *count = 0;
+            //return _mm_shuffle_epi32(data, _MM_SHUFFLE(3,2,1,0));
+            return data;
+    }
+}
+
+inline void
 findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& dest)
 {
     size_t n = data.size();
     size_t const end = (n / 4) * 4;
     size_t index = 0;
-    
+
     int *findTemp = new __attribute__((aligned(16))) int[end];
     int findTempNum = 0;
 
     __m128 target_m = _mm_set1_ps(target);
-    __m128 index_m = {0,1,2,3};
-    __m128 incVal_m = _mm_set1_ps(4);
-    __m128 one = _mm_set1_ps(1);
+    __m128i index_m = _mm_set_epi32(3, 2, 1, 0);
+    __m128i incVal_m = _mm_set1_epi32(4);
     
+    int getCnt=0;
     for(; index < end; index += 4)
     {
         __m128 data_m = _mm_loadu_ps(&data[index]);
         __m128 mask = _mm_cmpgt_ps(data_m, target_m);
-        
-        if( (mask[0] + mask[1] + mask[2] + mask[3]) != 0)
+
+        if ( (mask[0]+mask[1]+mask[2]+mask[3])!=0)
         {
-            __m128 hitBit = _mm_and_ps(one, mask);
-            
-            for (int i = 0; i< 4 ; i++)
-            {
-                findTemp[findTempNum] = index_m[i];
-                findTempNum += hitBit[i];
-            }
+            __m128i conv = gather_left_ps(index_m, mask, &getCnt);
+            _mm_storeu_si128( reinterpret_cast<__m128i*>(&findTemp[findTempNum]), conv );
+            findTempNum += getCnt;
         }
-        index_m = _mm_add_ps(index_m, incVal_m);
+        index_m = _mm_add_epi32(index_m, incVal_m);
     }
     
     dest = std::vector<int>(findTemp, &findTemp[findTempNum]);
