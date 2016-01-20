@@ -47,6 +47,16 @@ void div_Normal(T* data, T div, size_t n)
 }
 
 template<typename T>
+void add_mul_Normal(T* data, T add, T mul, size_t n)
+{
+    for (size_t i = 0; i < n; i++)
+    {
+        data[i] += add;
+        data[i] *= mul;        
+    }
+}
+
+template<typename T>
 double max_Normal(T* data, size_t n)
 {
     T max = data[0];

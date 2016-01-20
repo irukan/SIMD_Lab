@@ -159,6 +159,39 @@ void exp_add_int()
     //system("python Analysis/DispPlot.py output.csv");
     system("python Analysis/DispHist.py output.csv 5000 25000");
 }
+
+void exp_add_mul_double()
+{
+    dataN = 10000;
+    loopN = 5000;
+    
+    for (int i = 0; i < loopN; i++)
+    {
+        double *ar1 = rampArr<double>(2.5);
+        double *ar2 = rampArr<double>(2.5);
+        
+        TIMER.start("add_mul_Normal", NANO);
+        add_mul_Normal(ar1, 0.1, 0.5, dataN);
+        TIMER.stop();
+        
+        TIMER.start("add_mul_SSE", NANO);
+        add_mul_SSE(ar2, 0.1, 0.5, dataN);
+        TIMER.stop();
+        
+        for (int i = 0; i< dataN; i++)
+        {
+            if (!isEqual(ar1[i], ar2[i]))
+            {
+                cout << "Not match" << endl;
+                exit(1);
+            }
+        }
+    }
+    
+    TIMER.output("output.csv");
+    //system("python Analysis/DispPlot.py output.csv");
+    system("python Analysis/DispHist.py output.csv 5000 30000");
+}
 void exp_copy_int()
 {
     dataN = 10006;
@@ -465,7 +498,7 @@ exp_findIndex()
     }
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 15000");
+    system("python Analysis/DispHist.py output.csv 0 6000");
     
 }
 

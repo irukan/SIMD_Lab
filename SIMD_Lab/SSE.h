@@ -97,6 +97,19 @@ void add_SSE(double* data, double add, size_t n)
     }
 }
 
+void add_mul_SSE(double* data, double add, double mul, size_t n)
+{
+    __m128d add_m = _mm_set1_pd(add);
+    __m128d mul_m = _mm_set1_pd(mul);
+    for (size_t i = 0; i < n; i += 2)
+    {
+        __m128d data_m = _mm_loadu_pd(&data[i]);
+        __m128d ret = _mm_add_pd(data_m, add_m);
+        ret = _mm_mul_pd(ret, mul_m);
+        _mm_stream_pd(&data[i], ret);
+    }
+}
+
 void add_SSE(int* data, int add, size_t n)
 {
     __m128i add_m = _mm_set1_epi32(add);
@@ -308,12 +321,12 @@ gather_left_ps(__m128i data, __m128 mask, int* count )
     }
 }
 
-inline void
+inline  void
 findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& dest)
 {
     size_t n = data.size();
     size_t const end = (n / 4) * 4;
-    size_t index = 0;
+    int index = 0;
 
     int *findTemp = new __attribute__((aligned(16))) int[end];
     int findTempNum = 0;
@@ -328,9 +341,9 @@ findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& 
         __m128 data_m = _mm_loadu_ps(&data[index]);
         __m128 mask = _mm_cmpgt_ps(data_m, target_m);
 
-        if ( (mask[0]+mask[1]+mask[2]+mask[3])!=0)
+        __m128i conv = gather_left_ps(index_m, mask, &getCnt);
+        if (getCnt != 0)
         {
-            __m128i conv = gather_left_ps(index_m, mask, &getCnt);
             _mm_storeu_si128( reinterpret_cast<__m128i*>(&findTemp[findTempNum]), conv );
             findTempNum += getCnt;
         }
