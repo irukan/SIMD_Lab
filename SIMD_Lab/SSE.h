@@ -64,26 +64,30 @@ strcpy_SSE(const char* data, char* dist, size_t n)
 bool
 strcmp_SSE(const char* data1, const char* data2, size_t n)
 {
-    size_t const end = (n / 16) * 16;
+    //size_t const end = (n / 32) * 32;
     size_t index = 0;
 
-    for(; index < end; index += 16)
+    for(; index < n; index += 32)
     {
-        __m128i data1_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[index]));
-        __m128i data2_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[index]));
+        __m128i data1A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[index]));
+        __m128i data2A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[index]));
+        __m128i maskA = _mm_cmpeq_epi32(data1A_m, data2A_m);
         
-        __m128i mask = _mm_cmpeq_epi32(data1_m, data2_m);
+        __m128i data1B_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[index+16]));
+        __m128i data2B_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[index+16]));
+        __m128i maskB = _mm_cmpeq_epi32(data1B_m, data2B_m);
         
-        if ((mask[0] + mask[1]) != -2)
+        
+        if ((maskA[0] + maskA[1] + maskB[0] + maskB[1]) != -4)
             return false;
     }
     //余りは、Normal演算
-    for(; index < n; ++index)
-    {
-        if (data1[index] != data2[index])
-            return false;
-    }
-    
+//    for(; index < n; ++index)
+//    {
+//        if (data1[index] != data2[index])
+//            return false;
+//    }
+//    
     return 0;
 }
 
@@ -258,10 +262,8 @@ sin_SSE(__m128d th_m)
 
 static __inline__ __m128i __attribute__((__always_inline__, __nodebug__))
 gather_left_ps(__m128i data, __m128 mask, int* count )
-{
-    __m128 target = _mm_and_ps(_mm_set_ps(8, 4, 2, 1), mask);
- 
-    switch ((int)(target[0] + target[1] + target[2] + target[3])) {
+{ 
+    switch (_mm_movemask_ps(mask)) {
 
         case 1:
             *count = 1;
@@ -326,16 +328,16 @@ findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& 
 {
     size_t n = data.size();
     size_t const end = (n / 4) * 4;
+    dest.resize(end);
     int index = 0;
 
-    int *findTemp = new __attribute__((aligned(16))) int[end];
     int findTempNum = 0;
 
     __m128 target_m = _mm_set1_ps(target);
     __m128i index_m = _mm_set_epi32(3, 2, 1, 0);
     __m128i incVal_m = _mm_set1_epi32(4);
     
-    int getCnt=0;
+    int getCnt = 0;
     for(; index < end; index += 4)
     {
         __m128 data_m = _mm_loadu_ps(&data[index]);
@@ -344,14 +346,26 @@ findUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>& 
         __m128i conv = gather_left_ps(index_m, mask, &getCnt);
         if (getCnt != 0)
         {
-            _mm_storeu_si128( reinterpret_cast<__m128i*>(&findTemp[findTempNum]), conv );
+            _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), conv );
             findTempNum += getCnt;
         }
         index_m = _mm_add_epi32(index_m, incVal_m);
     }
     
-    dest = std::vector<int>(findTemp, &findTemp[findTempNum]);
-    delete [] findTemp;
+    dest.resize(findTempNum);
 }
+
+void exp()
+{
+    __m128d one = _mm_set1_pd(1.0);
+    
+    
+    int movemask1 = _mm_movemask_pd(_mm_cmpeq_pd(one, _mm_set_pd(0, 0)));
+    int movemask2 = _mm_movemask_pd(_mm_cmpeq_pd(one, _mm_set_pd(0, 1)));
+    int movemask3 = _mm_movemask_pd(_mm_cmpeq_pd(one, _mm_set_pd(1, 0)));
+    int movemask4 = _mm_movemask_pd(_mm_cmpeq_pd(one, _mm_set_pd(1, 1)));
+    
+}
+
 
 #endif /* SSE_h */
