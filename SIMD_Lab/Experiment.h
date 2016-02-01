@@ -471,7 +471,7 @@ exp_findIndex()
             data[i] = randVal((float)0, (float)10);
 
         vector<int> find1, find2;
-        float target = 5;
+        float target = 5.5;
       
         TIMER.start("findUpIndex_Normal", NANO);
         findUpIndex_Normal(data, target, find2);
@@ -484,6 +484,7 @@ exp_findIndex()
         if (find1.size() != find2.size())
         {
             cout << "Size not match" << endl;
+            cout << find1.size() << " " << find2.size() << endl;
             exit(1);
         }
         for (size_t i = 0; i < find1.size(); i++)
@@ -491,6 +492,7 @@ exp_findIndex()
             if (find1[i] != find2[i])
             {
                 cout << "Not Match!" << endl;
+                cout << i << ":"<<find1[i] << " " << find2[i] << endl;
                 exit(1);
             }
         }
