@@ -67,22 +67,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476021798.641136"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "max_SSE2(double* data, size_t n)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/Normal.h"
             timestampString = "474989713.145601"
             startingColumnNumber = "9223372036854775807"
@@ -100,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476021798.641136"
+            timestampString = "476371246.934194"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "max_SSE(double* data, size_t n)"
             landmarkType = "7">
             <Locations>
@@ -148,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476021798.641136"
+            timestampString = "476371246.934194"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116">
+            startingLineNumber = "115"
+            endingLineNumber = "115">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -162,11 +146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476021798.641136"
+            timestampString = "476371246.934194"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "addCopy_SSE(double* data, double* dist, double add, size_t n)"
             landmarkType = "7">
          </BreakpointContent>
@@ -194,11 +178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476021798.641136"
+            timestampString = "476371246.934194"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126">
+            startingLineNumber = "125"
+            endingLineNumber = "125">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -400,27 +384,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/Experiment.h"
-            timestampString = "474989713.145601"
+            timestampString = "476371341.78686"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
-            landmarkName = "exp_strcmp()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SIMD_Lab/Experiment.h"
-            timestampString = "474989713.145601"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "exp_strcmp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -438,22 +406,6 @@
             startingLineNumber = "108"
             endingLineNumber = "108"
             landmarkName = "exp_add_double()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SIMD_Lab/Experiment.h"
-            timestampString = "474989713.145601"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
-            landmarkName = "exp_strcmp()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -558,11 +510,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/Experiment.h"
-            timestampString = "474989713.145601"
+            timestampString = "476371341.78686"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
+            startingLineNumber = "431"
+            endingLineNumber = "431"
             landmarkName = "exp_sin()"
             landmarkType = "7">
          </BreakpointContent>
@@ -574,11 +526,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/Experiment.h"
-            timestampString = "474989713.145601"
+            timestampString = "476371341.78686"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
             landmarkName = "exp_sin()"
             landmarkType = "7">
          </BreakpointContent>
@@ -590,11 +542,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476028954.611992"
+            timestampString = "476374316.184556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376">
+            startingLineNumber = "371"
+            endingLineNumber = "371">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -604,11 +556,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476028954.611992"
+            timestampString = "476374316.184556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
             landmarkName = "findUpIndex_SSE(const std::vector&lt;float&gt;&amp; data, float target, std::vector&lt;int&gt;&amp; dest)"
             landmarkType = "7">
          </BreakpointContent>
@@ -620,11 +572,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476028954.611992"
+            timestampString = "476374316.184556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "exp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -636,11 +588,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476028954.611992"
+            timestampString = "476374316.184556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
             landmarkName = "exp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -652,12 +604,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/Experiment.h"
-            timestampString = "476026805.221983"
+            timestampString = "476371341.78686"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
-            landmarkName = "exp_findIndex()"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
+            landmarkName = "exp_findUpIndex()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -668,12 +620,140 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SIMD_Lab/SSE.h"
-            timestampString = "476028954.611992"
+            timestampString = "476374316.184556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "findUpIndex_SSE(const std::vector&lt;float&gt;&amp; data, float target, std::vector&lt;int&gt;&amp; dest)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/Experiment.h"
+            timestampString = "476371341.78686"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
+            landmarkName = "exp_strcmp()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/SSE.h"
+            timestampString = "476030677.240308"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "strcmp_SSE(const char* data1, const char* data2, int n)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/SSE.h"
+            timestampString = "476030727.378144"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "strcmp_SSE(const char* data1, const char* data2, int n)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/SSE.h"
+            timestampString = "476371246.934194"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "strcmp_SSE(const char* data1, const char* data2, int n)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/SSE.h"
+            timestampString = "476371246.934194"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "strcmp_SSE(const char* data1, const char* data2, int n)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/SSE.h"
+            timestampString = "476373886.231873"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "findIdx_SSE(int* data, int search, size_t n)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/SSE.h"
+            timestampString = "476373931.379155"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "findIdx_SSE(int* data, int search, size_t n)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SIMD_Lab/SSE.h"
+            timestampString = "476374316.184556"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "findIdx_SSE(int* data, int search, size_t n)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -62,33 +62,32 @@ strcpy_SSE(const char* data, char* dist, size_t n)
 }
 
 bool
-strcmp_SSE(const char* data1, const char* data2, size_t n)
+strcmp_SSE(const char* data1, const char* data2, int n)
 {
-    //size_t const end = (n / 32) * 32;
-    size_t index = 0;
+    int const end = (n / 32) * 32;
+    int index = 0;
 
-    for(; index < n; index += 32)
+    for(; index < end; index += 32)
     {
         __m128i data1A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[index]));
         __m128i data2A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[index]));
         __m128i maskA = _mm_cmpeq_epi32(data1A_m, data2A_m);
-        
+
         __m128i data1B_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[index+16]));
         __m128i data2B_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[index+16]));
         __m128i maskB = _mm_cmpeq_epi32(data1B_m, data2B_m);
-        
-        
-        if ((maskA[0] + maskA[1] + maskB[0] + maskB[1]) != -4)
+
+        if (_mm_movemask_epi8(maskA) + _mm_movemask_epi8(maskB) != 131070)
             return false;
     }
     //余りは、Normal演算
-//    for(; index < n; ++index)
-//    {
-//        if (data1[index] != data2[index])
-//            return false;
-//    }
-//    
-    return 0;
+    for(; index < n; ++index)
+    {
+        if (data1[index] != data2[index])
+            return false;
+    }
+    
+    return true;
 }
 
 void add_SSE(double* data, double add, size_t n)
@@ -180,53 +179,49 @@ max_SSE(double* data, size_t n)
     return std::max(ret[0], ret[1]);
 }
 
-double
-max_SSE2(double* data, size_t n)
-{
-    __m128d max = _mm_loadu_pd(&data[0]);
-    
-    for (int i = 0; i < n; i += 2)
-    {
-        __m128d data_m = _mm_loadu_pd(&data[i]);
-        max = _mm_max_pd(max, data_m);
-    }
-    
-    double ret[2];
-    _mm_stream_pd(ret, max);
-    
-    return std::max(ret[0], ret[1]);
-}
-
 int
 findIdx_SSE(int* data, int search, size_t n)
 {
     __m128i search_m = _mm_set1_epi32(search);
     
-    int result[4];
-    //__attribute__((aligned(16)))int result[4];
+    //int result[4];
+    __attribute__((aligned(16)))int resultA[4];
+    __attribute__((aligned(16)))int resultB[4];
     
     int index = 0;
-    for (; index < n; index += 4)
+    int movemask;
+    for (; index < n; index += 8)
     {
-        __m128i data_m = _mm_loadu_si128( reinterpret_cast<__m128i*>(&data[index]));
+        __m128i dataA_m = _mm_loadu_si128( reinterpret_cast<__m128i*>(&data[index]));
+        __m128i dataB_m = _mm_loadu_si128( reinterpret_cast<__m128i*>(&data[index+4]));
         
         // ##### if (data_m == search_m) -> true: 0xFFFFFFFF(-1), false: 0x00000000(0) #####
-        __m128i mask = _mm_cmpeq_epi32(data_m, search_m);
+        __m128i maskA = _mm_cmpeq_epi32(dataA_m, search_m);
+        __m128i maskB = _mm_cmpeq_epi32(dataB_m, search_m);
         
-        if ((mask[0] + mask[1]) != 0)
+        movemask = _mm_movemask_epi8(maskA) + _mm_movemask_epi8(maskB);
+        if (movemask != 0)
         {
-            _mm_stream_si128( reinterpret_cast<__m128i*>(&result[0]), mask);
+            _mm_stream_si128( reinterpret_cast<__m128i*>(&resultA[0]), maskA);
+            _mm_stream_si128( reinterpret_cast<__m128i*>(&resultB[0]), maskB);
             break;
         }
     }
     
     for (int i = 0; i < 4; i++)
     {
-        if (result[i] == -1)
+        if (resultA[i] == -1)
             return index;
         index++;
     }
-    
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (resultB[i] == -1)
+            return index;
+        index++;
+    }
+
     return -1;
 }
 

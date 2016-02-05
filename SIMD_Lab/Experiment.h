@@ -263,13 +263,13 @@ void exp_max_double()
 void exp_findIdx_int()
 {
     dataN = 10000;
-    loopN = 10000;
+    loopN = 1000;
     
     for (int i = 0; i < loopN; i++)
     {
         int* data = rampArr<int>(1);
         //int target = randVal(0, dataN);
-        int target = dataN / 2;
+        int target = dataN - 2;
      
         volatile int idx1;
         volatile int idx2;
@@ -293,7 +293,7 @@ void exp_findIdx_int()
     }
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 17000");
+    system("python Analysis/DispHist.py output.csv 0 5000");
     
 }
 
@@ -381,18 +381,11 @@ exp_strcmp()
     
     string randStrData = "abcdefghijklmnopqrstuvwxyz";
     
-//    char* src = new char[dataN];
-//    for (int i = 0; i < dataN -1 ; i++)
-//        src[i] =  randStrData[randVal(0, randStrData.size()-1)];
-//    char* target = new char[dataN];
-//    strcpy(target, src);
-//    target[dataN - 2] = 'A';
-//    
     string src="";
     for (int i = 0; i < dataN -1 ; i++)
         src += randStrData[randVal(0, randStrData.size()-1)];
     string target = src;
-    target[dataN - 2] = 'A';
+    //target[dataN - 2] = 'A';
     
     
     for (int l = 0; l< loopN; l++)
@@ -400,28 +393,26 @@ exp_strcmp()
         volatile bool find1 = true;
         volatile bool find2 = true;
         
-        TIMER.start("strcmp", NANO);
-        find1 = strcmp(src.data(), target.data());
-        //find1 = (src == target);
+        TIMER.start("strcmp_Normal3", NANO);
+        find1 = (src == target);
         TIMER.stop();
-        //cout << boolalpha << find1 << endl;
-        
-//        TIMER.start("strcmp_Normal3", NANO);
-//        find2 = strcmp_Normal3(src, target);
-//        TIMER.stop();
-//        cout << boolalpha << find2 << endl;
+
         TIMER.start("strcmp_SSE", NANO);
         find2 = strcmp_SSE(src.data(), target.data(), dataN);
-//        //find2 = strcmp_SSE(src, target, dataN);
         TIMER.stop();
         
-//        cout << find1 << find2 << endl;
+        //cout << boolalpha << find1 << " " << find2 << endl;
+        if (find1 != find2)
+        {
+            cout << "Not Match" <<endl;
+            exit(1);
+        }
     }
         
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 3000");
+    system("python Analysis/DispHist.py output.csv 0 260");
 }
 
 void
@@ -454,7 +445,7 @@ exp_sin()
 }
 
 void
-exp_findIndex()
+exp_findUpIndex()
 {
 //    vector<float> data = {0.2, 1.3, 3.22, 1.3 , 0.44, 4.55, 2.33, 3.33};
 //    vector<int> find;
@@ -471,7 +462,7 @@ exp_findIndex()
             data[i] = randVal((float)0, (float)10);
 
         vector<int> find1, find2;
-        float target = 5.5;
+        float target = 0.5;
       
         TIMER.start("findUpIndex_Normal", NANO);
         findUpIndex_Normal(data, target, find2);
