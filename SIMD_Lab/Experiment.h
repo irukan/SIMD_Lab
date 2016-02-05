@@ -393,7 +393,7 @@ exp_strcmp()
         volatile bool find1 = true;
         volatile bool find2 = true;
         
-        TIMER.start("strcmp_Normal3", NANO);
+        TIMER.start("strcmp_Normal", NANO);
         find1 = (src == target);
         TIMER.stop();
 
