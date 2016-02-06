@@ -124,7 +124,7 @@ void exp_add_double()
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 5000 25000");
+    system("python Analysis/DispHist.py output.csv 0 10000");
 }
 
 void exp_add_int()
@@ -263,13 +263,13 @@ void exp_max_double()
 void exp_findIdx_int()
 {
     dataN = 10000;
-    loopN = 1000;
+    loopN = 5000;
     
     for (int i = 0; i < loopN; i++)
     {
         int* data = rampArr<int>(1);
         //int target = randVal(0, dataN);
-        int target = dataN - 2;
+        int target = dataN -13;
      
         volatile int idx1;
         volatile int idx2;
@@ -385,7 +385,7 @@ exp_strcmp()
     for (int i = 0; i < dataN -1 ; i++)
         src += randStrData[randVal(0, randStrData.size()-1)];
     string target = src;
-    //target[dataN - 2] = 'A';
+    target[dataN - 2] = 'A';
     
     
     for (int l = 0; l< loopN; l++)
@@ -445,7 +445,7 @@ exp_sin()
 }
 
 void
-exp_findUpIndex()
+exp_searchUpIndex()
 {
 //    vector<float> data = {0.2, 1.3, 3.22, 1.3 , 0.44, 4.55, 2.33, 3.33};
 //    vector<int> find;
@@ -465,11 +465,11 @@ exp_findUpIndex()
         float target = 0.5;
       
         TIMER.start("findUpIndex_Normal", NANO);
-        findUpIndex_Normal(data, target, find2);
+        searchUpIndex_Normal(data, target, find2);
         TIMER.stop();
 
         TIMER.start("findUpIndex_SSE", NANO);
-        findUpIndex_SSE(data, target, find1);
+        searchUpIndex_SSE(data, target, find1);
         TIMER.stop();
         
         if (find1.size() != find2.size())

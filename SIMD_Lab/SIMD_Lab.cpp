@@ -26,7 +26,7 @@ int  main(int argc, const char * argv[])
     //exp_strcmp();
     //exp_sin();
     
-    //exp_findUpIndex();
+    //exp_searchUpIndex();
     
     //experiment();
     return 0;

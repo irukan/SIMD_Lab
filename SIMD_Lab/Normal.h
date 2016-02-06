@@ -187,7 +187,7 @@ strcmp_Normal3(const std::string& __lhs, const std::string& __rhs)
 
 
 template<typename T>
-void findUpIndex_Normal(const std::vector<T>& data, T target, std::vector<int>& dest)
+void searchUpIndex_Normal(const std::vector<T>& data, T target, std::vector<int>& dest)
 {
     size_t n = data.size();
     size_t const end = (n / 4) * 4;
