@@ -64,12 +64,9 @@ strcpy_SSE(const char* data, char* dist, size_t n)
 bool
 strcmp_SSE(const char* data1, const char* data2, int n)
 {
-    int dd = n & 15;
-    //int const end = (n / 32) * 32;
-    //int index = 0;
+    int const end = (n / 32) * 32;
 
-//    int end = n - dd;
-    for(int index = 0; index < n -dd; index += 32)
+    for(int index = 0; index < end; index += 32)
     {
         __m128i data1A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[index]));
         __m128i data2A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[index]));
@@ -80,17 +77,23 @@ strcmp_SSE(const char* data1, const char* data2, int n)
         __m128i maskA = _mm_cmpeq_epi32(data1A_m, data2A_m);
         __m128i maskB = _mm_cmpeq_epi32(data1B_m, data2B_m);
         
-        if (_mm_movemask_epi8(maskA) + _mm_movemask_epi8(maskB) != 131070)
-            return false;
-    }
-    //余りは、Normal演算
-    for(int index = 0; index < dd; ++index)
-    {
-        if (data1[index] != data2[index])
+        if ((_mm_movemask_epi8(maskA) + _mm_movemask_epi8(maskB)) != 131070)
             return false;
     }
     
-    return true;
+    //余り
+    int remain1 = n - 32;
+    int remain2 = n - 16;
+    __m128i remain1A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[remain1]));
+    __m128i remain2A_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[remain1]));
+    __m128i maskRemainA = _mm_cmpeq_epi32(remain1A_m, remain2A_m);
+    
+    __m128i remain1B_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data1[remain2]));
+    __m128i remain2B_m = _mm_loadu_si128(reinterpret_cast<const __m128i*>(&data2[remain2]));
+    __m128i maskRemainB = _mm_cmpeq_epi32(remain1B_m, remain2B_m);
+    
+    // 余りで違いがなければtrueを返す。あればfalse
+    return (_mm_movemask_epi8(maskRemainA) + _mm_movemask_epi8(maskRemainB)) == 131070;
 }
 
 void add_SSE(double* data, double add, size_t n)

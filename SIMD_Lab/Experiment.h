@@ -271,21 +271,21 @@ void exp_findIdx_int()
         //int target = randVal(0, dataN);
         int target = dataN -13;
      
-        volatile int idx1;
+        volatile int* idx1;
         volatile int idx2;
         
         
         TIMER.start("findIdx_Normal", NANO);
-        idx1 = findIdx_Normal(data, target , dataN);
+        //idx1 = findIdx_Normal(data, target , dataN);
+        idx1 = std::find(&data[0], &data[dataN], target);
         TIMER.stop();
 
 
-        
         TIMER.start("findIdx_SSE", NANO);
         idx2 = findIdx_SSE(data, target , dataN);
         TIMER.stop();
         
-        if (idx1 != idx2)
+        if (*idx1 != idx2)
         {
             cout << "Not match" << endl;
             exit(1);
@@ -385,7 +385,7 @@ exp_strcmp()
     for (int i = 0; i < dataN -1 ; i++)
         src += randStrData[randVal(0, randStrData.size()-1)];
     string target = src;
-    target[dataN - 2] = 'A';
+    //target[dataN - 20] = 'A';
     
     
     for (int l = 0; l< loopN; l++)
@@ -412,7 +412,7 @@ exp_strcmp()
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 260");
+    system("python Analysis/DispHist.py output.csv 15 0 260");
 }
 
 void
