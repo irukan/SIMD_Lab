@@ -453,7 +453,7 @@ exp_searchUpIndex()
     
   
     dataN = 1024;
-    loopN = 1000;
+    loopN = 500;
 
     for (int l = 0; l< loopN; l++)
     {
@@ -462,7 +462,7 @@ exp_searchUpIndex()
             data[i] = randVal((float)0, (float)10);
 
         vector<int> find1, find2;
-        float target = 0.5;
+        float target = 9.5;
       
         TIMER.start("findUpIndex_Normal", NANO);
         searchUpIndex_Normal(data, target, find2);
@@ -491,7 +491,7 @@ exp_searchUpIndex()
     }
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 30000");
+    system("python Analysis/DispHist.py output.csv 100 0 15000");
     
 }
 

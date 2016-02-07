@@ -309,19 +309,82 @@ searchUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>
     int findTempNum = 0;
 
     __m128 target_m = _mm_set1_ps(target);
-    
-    int getCnt = 0;
+
     for(; index < end; index += 4)
     {
-        __m128 data_m = _mm_loadu_ps(&data[index]);
-        __m128 mask = _mm_cmpgt_ps(data_m, target_m);
+        __m128 dataA_m = _mm_loadu_ps(&data[index]);
+        __m128 maskA = _mm_cmpgt_ps(dataA_m, target_m);
 
-        __m128i conv = gather_left_ps(mask, &getCnt);
-        if (getCnt != 0)
+        int movemaskA = _mm_movemask_ps(maskA);
+        
+        if (!movemaskA)
+            continue;
+        
+        switch (movemaskA)
         {
-            conv = _mm_add_epi32(conv, _mm_set1_epi32(index));
-            _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), conv );
-            findTempNum += getCnt;
+            case 1://1000
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_setzero_si128(), _mm_set1_epi32(index)));
+                findTempNum += 1;
+                break;
+            case 2://0100
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set1_epi32(1), _mm_set1_epi32(index)));
+                findTempNum += 1;
+                break;
+            case 3://1100
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,0,1,0), _mm_set1_epi32(index)));
+                findTempNum += 2;
+                break;
+            case 4://0010
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set1_epi32(2), _mm_set1_epi32(index)));
+                findTempNum += 1;
+                break;
+            case 5://1010
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,0,2,0), _mm_set1_epi32(index)));
+                findTempNum += 2;
+                break;
+            case 6://0110
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,0,2,1), _mm_set1_epi32(index)));
+                findTempNum += 2;
+                break;
+            case 7://1110
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,2,1,0), _mm_set1_epi32(index)));
+                findTempNum += 3;
+                break;
+            case 8://0001
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set1_epi32(3), _mm_set1_epi32(index)));
+                findTempNum += 1;
+                break;
+            case 9://1001
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,0,3,0), _mm_set1_epi32(index)));
+                findTempNum += 2;
+                break;
+            case 10://0101
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,0,3,1), _mm_set1_epi32(index)));
+                findTempNum += 2;
+                break;
+            case 11://1101
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,3,1,0), _mm_set1_epi32(index)));
+                findTempNum += 3;
+                break;
+            case 12://0011
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,0,3,2), _mm_set1_epi32(index)));
+                findTempNum += 2;
+                break;
+            case 13://1011
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,3,2,0), _mm_set1_epi32(index)));
+                findTempNum += 3;
+                break;
+            case 14://0111
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(0,3,2,1), _mm_set1_epi32(index)));
+                findTempNum += 3;
+                break;
+            case 15://1111
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set_epi32(3,2,1,0), _mm_set1_epi32(index)));
+                findTempNum += 4;
+                break;
+                
+           // default:
+             //   break;
         }
     }
     
