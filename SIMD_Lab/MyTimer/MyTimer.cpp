@@ -38,31 +38,6 @@ MyTimer::MyTimer()
 
 MyTimer::~MyTimer(){}
 
-MyTimer&
-MyTimer::getInstance()
-{
-    static MyTimer inst;
-    
-    return inst;
-}
-
-void
-MyTimer::start(const std::string& label, TimeReso reso)
-{
-    m_label.push_back(label);
-    m_reso.push_back(reso);
-    
-    m_start = std::chrono::high_resolution_clock::now();
-}
-
-void
-MyTimer::stop()
-{
-    m_stop = std::chrono::high_resolution_clock::now();
-    
-    m_data.push_back(getTime(m_reso[m_reso.size() - 1]));
-}
-
 double
 MyTimer::getTime(TimeReso reso)
 {

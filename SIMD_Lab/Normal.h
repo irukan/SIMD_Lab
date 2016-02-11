@@ -191,22 +191,23 @@ void searchUpIndex_Normal(const std::vector<T>& data, T target, std::vector<int>
 {
     size_t n = data.size();
     size_t const end = (n / 4) * 4;
-    
+    dest.resize(n);
 
-    int* temp = new int[n];
+    //int* temp = new int[n];
     int findNum=0;
-    for (size_t i = 0; i< end; i++)
+    for (int i = 0; i< end; i++)
     {
         if (data[i] > target)
         {
+            dest[findNum++] = i;
             //dest.push_back(i);
-            temp[findNum] = i;
-            findNum++;
+            //temp[findNum] = i;
+            //findNum++;
         }
     }
     
-    dest = std::vector<int>(temp, &temp[findNum]);
-    delete [] temp;
+    //dest = std::vector<int>(temp, &temp[findNum]);
+    //delete [] temp;
 }
 
 #endif /* Normal_h */

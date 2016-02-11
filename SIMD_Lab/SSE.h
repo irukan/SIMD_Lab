@@ -303,7 +303,7 @@ searchUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>
 {
     size_t n = data.size();
     size_t const end = (n / 4) * 4;
-    dest.resize(end);
+    dest.resize(n);
     int index = 0;
 
     int findTempNum = 0;
@@ -313,9 +313,9 @@ searchUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>
     for(; index < end; index += 4)
     {
         __m128 dataA_m = _mm_loadu_ps(&data[index]);
-        __m128 maskA = _mm_cmpgt_ps(dataA_m, target_m);
+        //__m128 maskA = _mm_cmpgt_ps(dataA_m, target_m);
 
-        int movemaskA = _mm_movemask_ps(maskA);
+        int movemaskA = _mm_movemask_ps(_mm_cmpgt_ps(dataA_m, target_m));
         
         if (!movemaskA)
             continue;
@@ -323,11 +323,11 @@ searchUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>
         switch (movemaskA)
         {
             case 1://1000
-                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_setzero_si128(), _mm_set1_epi32(index)));
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_set1_epi32(index));
                 findTempNum += 1;
                 break;
             case 2://0100
-                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set1_epi32(1), _mm_set1_epi32(index)));
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_set1_epi32(index+1));
                 findTempNum += 1;
                 break;
             case 3://1100
@@ -335,7 +335,7 @@ searchUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>
                 findTempNum += 2;
                 break;
             case 4://0010
-                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set1_epi32(2), _mm_set1_epi32(index)));
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_set1_epi32(index+2));
                 findTempNum += 1;
                 break;
             case 5://1010
@@ -351,7 +351,7 @@ searchUpIndex_SSE(const std::vector<float>& data, float target, std::vector<int>
                 findTempNum += 3;
                 break;
             case 8://0001
-                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_add_epi32(_mm_set1_epi32(3), _mm_set1_epi32(index)));
+                _mm_storeu_si128( reinterpret_cast<__m128i*>(&dest[findTempNum]), _mm_set1_epi32(index+3));
                 findTempNum += 1;
                 break;
             case 9://1001
