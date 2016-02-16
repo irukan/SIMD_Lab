@@ -10,6 +10,7 @@
 #define Normal_h
 
 #include <vector>
+#include <math.h>
 
 template<typename T>
 void copy_Normal(T* data, T* dist, size_t n)
@@ -96,23 +97,23 @@ double power(double data, int n)
     return ret;
 }
 
-double
-sin_Normal(double sita, int rank)
+inline double
+sin_Normal(double sita)
 {
     double ret = 0.0;
 
-//    int ruijo = 1;
-//    
-//    for (int i = 0; i< rank; i++)
-//    {
-//        ret += power(sita, ruijo) * 1.0/ (double)factorial(ruijo) * ( i %2 == 0 ? 1: -1);
-//        ruijo += 2;
-//    }
+    int ruijo = 1;
     
-    ret += sita;
-    ret -= 0.16666666666 * sita * sita * sita;
-    ret += 0.00833333333 * sita * sita * sita * sita * sita;
-    ret -= 0.00018518518 * sita * sita * sita * sita * sita * sita * sita;
+    for (int i = 0; i< 6; i++)
+    {
+        ret += power(sita, ruijo) * 1.0/ (double)factorial(ruijo) * ( i %2 == 0 ? 1: -1);
+        ruijo += 2;
+    }
+    
+//    ret += sita;
+//    ret -= 0.16666666666 * sita * sita * sita;
+//    ret += 0.00833333333 * sita * sita * sita * sita * sita;
+//    ret -= 0.00018518518 * sita * sita * sita * sita * sita * sita * sita;
     return ret;
 }
 

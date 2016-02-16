@@ -33,6 +33,7 @@
 		AA65C3F81C303880008A7EC8 /* SIMD_Lab.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SIMD_Lab.cpp; sourceTree = "<group>"; };
 		AA65C4041C30D08B008A7EC8 /* MyTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MyTimer.cpp; path = SIMD_Lab/MyTimer/MyTimer.cpp; sourceTree = "<group>"; };
 		AA65C4051C30D08B008A7EC8 /* MyTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyTimer.h; path = SIMD_Lab/MyTimer/MyTimer.h; sourceTree = "<group>"; };
+		AA9C353C1C6C5C1500D1BA6F /* TrigFunc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrigFunc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +81,7 @@
 				AA3490821C338F53009BC2B2 /* SSE.h */,
 				AA3490811C338F46009BC2B2 /* Normal.h */,
 				AA3490831C35032C009BC2B2 /* Experiment.h */,
+				AA9C353C1C6C5C1500D1BA6F /* TrigFunc.h */,
 			);
 			path = SIMD_Lab;
 			sourceTree = "<group>";

@@ -20,10 +20,10 @@ int  main(int argc, const char * argv[])
     //exp_max_double();
     
     //exp_findIdx_int();
-    //exp_sine();
+    exp_Trig();
     
     //exp_strcpy();
-    exp_strcmp();
+    //exp_strcmp();
     //exp_sin();
     
     //exp_searchUpIndex();

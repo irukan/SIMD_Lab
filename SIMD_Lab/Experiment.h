@@ -13,6 +13,7 @@
 
 #include "SSE.h"
 #include "Normal.h"
+#include "TrigFunc.h"
 
 #include <iostream>
 #include <math.h>
@@ -297,28 +298,34 @@ void exp_findIdx_int()
     
 }
 
-void exp_sine()
+void exp_Trig()
 {
-    dataN = 1000;
+    dataN = 10000;
     loopN = 1000;
     
     for (int l = 0; l< loopN; l++)
     {
-        volatile double x = 0;
-        TIMER.start("sin_My", NANO);
+        volatile double x1 = 0;
+        volatile double x2 = 0;
+        TIMER.start("sin_My", MICRO);
         for (int i = 0; i < dataN; i++)
         {
-            x = sin_Normal(0.5, 5);
+            x1 += sin_Normal(0.5);
         }
         TIMER.stop();
 
-        TIMER.start("sin_STD", NANO);
+        TIMER.start("sin_Normal", MICRO);
         for (int i = 0; i < dataN; i++)
         {
-            x = sin(0.5);
-            x = sin(0.7);
+            x2 += sin(0.5);
         }
         TIMER.stop();
+        
+        //cout << x1 << " " << x2 << endl;
+        
+        if (!isEqual(x1, x2))
+            cout << "Not Match" << endl;
+
     }
 
 //    double x = sin(0.5);
@@ -335,7 +342,7 @@ void exp_sine()
     
     TIMER.output("output.csv");
     //system("python Analysis/DispPlot.py output.csv");
-    system("python Analysis/DispHist.py output.csv 0 27000");
+    system("python Analysis/DispHist.py output.csv 50 0 6000");
     
 }
 
